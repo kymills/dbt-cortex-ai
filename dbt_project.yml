@@ -1,0 +1,32 @@
+name: 'dbt_cortex_ai'
+version: '1.0.0'
+
+profile: 'KMILLS_AWS3'
+
+model-paths: ["models"]
+seed-paths: ["seeds"]
+test-paths: ["tests"]
+macro-paths: ["macros"]
+
+target-path: "target"
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+seeds:
+  dbt_cortex_ai:
+    +schema: PUBLIC
+
+models:
+  dbt_cortex_ai:
+    staging:
+      +materialized: view
+      +schema: PUBLIC
+    intermediate:
+      +materialized: incremental
+      +schema: PUBLIC
+      +tags: ['ai_enrichment']
+    marts:
+      +materialized: table
+      +schema: PUBLIC
+      +tags: ['ai_enrichment']

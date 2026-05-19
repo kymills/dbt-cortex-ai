@@ -1,0 +1,14 @@
+version: 2
+
+models:
+  - name: mart_weekly_ticket_themes
+    columns:
+      - name: week
+        tests:
+          - not_null
+      - name: ticket_category
+        tests:
+          - not_null
+      - name: weekly_themes
+        tests:
+          - not_null

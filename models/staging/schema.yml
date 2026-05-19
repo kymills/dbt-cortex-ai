@@ -1,0 +1,23 @@
+version: 2
+
+models:
+  - name: stg_support_tickets
+    columns:
+      - name: ticket_id
+        tests:
+          - unique
+          - not_null
+
+  - name: stg_call_notes
+    columns:
+      - name: note_id
+        tests:
+          - unique
+          - not_null
+
+  - name: stg_product_reviews
+    columns:
+      - name: review_id
+        tests:
+          - unique
+          - not_null
