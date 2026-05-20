@@ -1,0 +1,44 @@
+version: 2
+
+sources:
+  - name: dbt_cortex_ai
+    database: dbt_cortex_ai
+    schema: public
+    tables:
+      - name: support_tickets
+        description: "Raw support ticket data with customer inquiries and complaints"
+        columns:
+          - name: ticket_id
+            description: "Unique ticket identifier"
+          - name: customer_id
+            description: "Customer identifier"
+          - name: created_at
+            description: "Timestamp when ticket was created"
+          - name: subject
+            description: "Ticket subject line"
+          - name: body
+            description: "Full ticket body text"
+
+      - name: call_notes
+        description: "Agent call notes from customer support interactions"
+        columns:
+          - name: note_id
+            description: "Unique note identifier"
+          - name: agent_id
+            description: "Support agent identifier"
+          - name: call_date
+            description: "Date of the call"
+          - name: note_text
+            description: "Free-text call notes written by agent"
+
+      - name: product_reviews
+        description: "Customer product reviews and feedback"
+        columns:
+          - name: review_id
+            description: "Unique review identifier"
+          - name: product_name
+            description: "Name of the product reviewed"
+          - name: review_date
+            description: "Date of the review"
+          - name: review_text
+            description: "Full review text"

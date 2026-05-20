@@ -1,0 +1,22 @@
+dbt_cortex_ai:
+  outputs:
+    dev:
+      type: snowflake
+      account: ""
+      user: ""
+      database: dbt_cortex_ai
+      schema: public
+      warehouse: dbt_dev_wh
+      role: accountadmin
+
+    prod:
+      type: snowflake
+      account: ""
+      user: ""
+      database: dbt_cortex_ai
+      schema: public
+      warehouse: dbt_prod_wh
+      role: accountadmin
+      threads: 8
+
+  target: dev

@@ -2,61 +2,99 @@ version: 2
 
 models:
   - name: mart_tickets_enriched
+    description: "Support tickets enriched with AI-powered sentiment analysis using snowflake.cortex.sentiment()"
     columns:
       - name: ticket_id
+        description: "Unique ticket identifier"
         tests:
           - unique
           - not_null
       - name: sentiment_score
+        description: "Sentiment score from -1 (negative) to 1 (positive)"
         tests:
           - not_null
       - name: sentiment_bucket
+        description: "Categorized sentiment: positive (>=0.3), negative (<=-0.3), or neutral"
         tests:
           - not_null
           - accepted_values:
               values: ['positive', 'negative', 'neutral']
 
   - name: mart_tickets_classified
+    description: "Support tickets auto-classified into categories using snowflake.cortex.classify_text()"
     columns:
       - name: ticket_id
+        description: "Unique ticket identifier"
         tests:
           - unique
           - not_null
       - name: ticket_category
+        description: "AI-assigned ticket category"
         tests:
           - not_null
           - accepted_values:
               values: ['Billing Issue', 'Technical Support', 'Feature Request', 'Account Access', 'General Inquiry']
 
   - name: mart_call_notes_extracted
+    description: "Call notes with structured fields extracted using snowflake.cortex.extract_answer()"
     columns:
       - name: note_id
+        description: "Unique note identifier"
         tests:
           - unique
           - not_null
       - name: customer_name
+        description: "Customer name extracted from free-text notes"
         tests:
           - not_null
+      - name: issue_type
+        description: "Issue type extracted from free-text notes"
+      - name: resolution
+        description: "Resolution or action taken, extracted from notes"
+      - name: follow_up_needed
+        description: "Whether follow-up is required, extracted from notes"
 
   - name: mart_reviews_analyzed
+    description: "Product reviews analyzed using snowflake.cortex.complete() with llama3.1-70b for multi-field JSON extraction"
     columns:
       - name: review_id
+        description: "Unique review identifier"
         tests:
           - unique
           - not_null
+      - name: wants_refund
+        description: "Whether the reviewer is requesting a refund (true/false)"
+      - name: key_complaint
+        description: "One-sentence summary of the main complaint, null if positive"
       - name: urgency
+        description: "Urgency level: high, medium, or low"
         tests:
           - accepted_values:
               values: ['high', 'medium', 'low']
+      - name: overall_sentiment
+        description: "Overall sentiment: positive, negative, or mixed"
+        tests:
+          - accepted_values:
+              values: ['positive', 'negative', 'mixed']
 
   - name: mart_weekly_ticket_themes
+    description: "Weekly ticket themes summarized using snowflake.cortex.summarize() grouped by category"
     columns:
       - name: week
+        description: "Week start date"
         tests:
           - not_null
       - name: ticket_category
+        description: "Ticket category"
         tests:
           - not_null
+      - name: ticket_count
+        description: "Number of tickets in this category for the week"
+        tests:
+          - not_null
+      - name: avg_sentiment
+        description: "Average sentiment score for tickets in this group"
       - name: weekly_themes
+        description: "AI-generated summary of recurring themes from ticket bodies"
         tests:
           - not_null

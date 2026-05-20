@@ -2,22 +2,64 @@ version: 2
 
 models:
   - name: stg_support_tickets
+    description: "Cleaned and standardized support ticket data"
     columns:
       - name: ticket_id
+        description: "Unique ticket identifier"
         tests:
           - unique
+          - not_null
+      - name: customer_id
+        description: "Customer identifier"
+        tests:
+          - not_null
+      - name: created_at
+        description: "Timestamp when ticket was created"
+        tests:
+          - not_null
+      - name: body
+        description: "Full ticket body text"
+        tests:
           - not_null
 
   - name: stg_call_notes
+    description: "Cleaned and standardized agent call notes"
     columns:
       - name: note_id
+        description: "Unique note identifier"
         tests:
           - unique
           - not_null
+      - name: agent_id
+        description: "Support agent identifier"
+        tests:
+          - not_null
+      - name: call_date
+        description: "Date of the call"
+        tests:
+          - not_null
+      - name: note_text
+        description: "Free-text call notes"
+        tests:
+          - not_null
 
   - name: stg_product_reviews
+    description: "Cleaned and standardized product reviews"
     columns:
       - name: review_id
+        description: "Unique review identifier"
         tests:
           - unique
+          - not_null
+      - name: product_name
+        description: "Name of the product reviewed"
+        tests:
+          - not_null
+      - name: review_date
+        description: "Date of the review"
+        tests:
+          - not_null
+      - name: review_text
+        description: "Full review text"
+        tests:
           - not_null

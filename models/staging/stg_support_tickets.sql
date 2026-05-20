@@ -4,4 +4,4 @@ select
     created_at::timestamp as created_at,
     subject,
     body
-from {{ ref('support_tickets') }}
+from {{ source('dbt_cortex_ai', 'support_tickets') }}
