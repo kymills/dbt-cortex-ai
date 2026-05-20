@@ -8,7 +8,7 @@ select
     snowflake.cortex.summarize(
         listagg(c.body, '\n---\n')
     ) as weekly_themes
-from {{ ref('int_tickets_classified') }} c
-join {{ ref('int_tickets_enriched') }} e
+from {{ ref('mart_tickets_classified') }} c
+join {{ ref('mart_tickets_enriched') }} e
     on c.ticket_id = e.ticket_id
 group by 1, 2

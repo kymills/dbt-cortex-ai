@@ -22,10 +22,6 @@ models:
     staging:
       +materialized: view
       +schema: PUBLIC
-    intermediate:
-      +materialized: incremental
-      +schema: PUBLIC
-      +tags: ['ai_enrichment']
     marts:
       +materialized: table
       +schema: PUBLIC
