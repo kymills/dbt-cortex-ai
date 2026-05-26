@@ -1,7 +1,7 @@
 {{ config(materialized='table') }}
 
 select
-    date_trunc('week', created_at) as week,
+    date_trunc('week', c.created_at) as week,
     ticket_category,
     count(*) as ticket_count,
     avg(e.sentiment_score) as avg_sentiment,
